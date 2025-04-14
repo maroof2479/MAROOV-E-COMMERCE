@@ -1,15 +1,17 @@
 
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingBag, Menu, X, User, Search } from 'lucide-react';
+import { ShoppingBag, Menu, X, User, Search, Moon, Sun } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from '@/contexts/CartContext';
+import { useTheme } from '@/components/admin/ThemeContext';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { cartItems } = useCart();
+  const { theme, toggleTheme } = useTheme();
   
   const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
 
@@ -65,6 +67,20 @@ export default function Navbar() {
                 </Badge>
               )}
             </Link>
+          </Button>
+          
+          {/* Theme Toggle */}
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            aria-label="Toggle theme" 
+            onClick={toggleTheme}
+          >
+            {theme === 'dark' ? (
+              <Sun className="h-5 w-5" />
+            ) : (
+              <Moon className="h-5 w-5" />
+            )}
           </Button>
           
           <Button 
