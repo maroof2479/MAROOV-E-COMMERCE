@@ -10,7 +10,7 @@ import { CategoryDistribution } from "@/components/admin/CategoryDistribution";
 const AdminDashboard = () => {
   return (
     <Layout>
-      <div className="p-6">
+      <div className="p-6 transition-colors duration-200">
         <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
         
         <DashboardMetrics />
