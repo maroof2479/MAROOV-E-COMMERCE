@@ -17,7 +17,7 @@ const Index = () => {
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl font-medium mb-6">Thoughtfully Designed, Ethically Made</h2>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                At Aesthetic Avenue, we believe in the power of beautiful objects to enhance everyday living. 
+                At Maroov, we believe in the power of beautiful objects to enhance everyday living. 
                 Our curated collection brings together pieces that balance form and function, crafted with 
                 care by artisans who share our commitment to quality and sustainability.
               </p>

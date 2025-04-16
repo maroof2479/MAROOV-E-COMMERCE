@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { Instagram, Twitter, Facebook, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -48,7 +47,6 @@ export default function Footer() {
           </div>
         </div>
         
-        {/* Social and Copyright */}
         <div className="mt-12 pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center">
           <div className="flex space-x-6 mb-4 md:mb-0">
             <a 
@@ -89,11 +87,10 @@ export default function Footer() {
           </div>
           
           <div className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Aesthetic Avenue. All rights reserved.
+            &copy; {new Date().getFullYear()} Maroov. All rights reserved.
           </div>
         </div>
       </div>
     </footer>
   );
 }
-
