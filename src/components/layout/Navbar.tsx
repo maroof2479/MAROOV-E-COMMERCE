@@ -1,17 +1,27 @@
 
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { ShoppingBag, Menu, X, User, Search, Moon, Sun } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ShoppingBag, Menu, X, User, Search, Moon, Sun, LogOut } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from '@/contexts/CartContext';
 import { useTheme } from '@/components/admin/ThemeContext';
+import { useAuth } from '@/contexts/AuthContext';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { cartItems } = useCart();
   const { theme, toggleTheme } = useTheme();
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
   
   const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
 
@@ -27,6 +37,11 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <header 
@@ -54,9 +69,37 @@ export default function Navbar() {
             <Search className="h-5 w-5" />
           </Button>
           
-          <Button variant="ghost" size="icon" aria-label="Account">
-            <User className="h-5 w-5" />
-          </Button>
+          {isAuthenticated ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" aria-label="Account">
+                  <User className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <div className="px-2 py-1.5 text-sm font-medium">
+                  {user?.name || user?.email}
+                </div>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/profile">My Profile</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/orders">My Orders</Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout} className="text-destructive">
+                  <LogOut className="mr-2 h-4 w-4" /> Sign Out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button variant="ghost" size="icon" aria-label="Account" asChild>
+              <Link to="/login">
+                <User className="h-5 w-5" />
+              </Link>
+            </Button>
+          )}
           
           <Button variant="ghost" size="icon" aria-label="Cart" asChild>
             <Link to="/cart" className="relative">
@@ -122,6 +165,25 @@ export default function Navbar() {
             <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="hover:underline underline-offset-4 decoration-1">
               About
             </Link>
+            {isAuthenticated ? (
+              <>
+                <Link to="/profile" onClick={() => setIsMobileMenuOpen(false)} className="hover:underline underline-offset-4 decoration-1">
+                  My Profile
+                </Link>
+                <button onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }} className="hover:underline underline-offset-4 decoration-1">
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="hover:underline underline-offset-4 decoration-1">
+                  Sign In
+                </Link>
+                <Link to="/register" onClick={() => setIsMobileMenuOpen(false)} className="hover:underline underline-offset-4 decoration-1">
+                  Create Account
+                </Link>
+              </>
+            )}
           </nav>
         </div>
       )}
