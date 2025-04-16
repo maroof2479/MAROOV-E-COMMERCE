@@ -7,13 +7,16 @@ export interface User {
   id: string;
   email: string;
   name?: string;
+  isAdmin?: boolean;
 }
 
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
+  isAdmin: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<boolean>;
+  loginAsAdmin: (email: string) => Promise<boolean>;
   register: (email: string, password: string, name: string) => Promise<boolean>;
   logout: () => void;
 }
@@ -58,6 +61,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           id: '1',
           email,
           name: email.split('@')[0],
+          isAdmin: false
         };
         
         setUser(mockUser);
@@ -71,6 +75,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } catch (error) {
       console.error('Login failed:', error);
       toast.error('Login failed. Please try again.');
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Admin login function
+  const loginAsAdmin = async (email: string): Promise<boolean> => {
+    setIsLoading(true);
+    
+    try {
+      // Simulate API call with a delay
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
+      // Admin credentials validation should happen on the server-side in real app
+      const mockAdminUser = {
+        id: 'admin-1',
+        email,
+        name: 'Administrator',
+        isAdmin: true
+      };
+      
+      setUser(mockAdminUser);
+      localStorage.setItem('user', JSON.stringify(mockAdminUser));
+      toast.success('Admin logged in successfully');
+      return true;
+    } catch (error) {
+      console.error('Admin login failed:', error);
+      toast.error('Admin login failed. Please try again.');
       return false;
     } finally {
       setIsLoading(false);
@@ -123,8 +156,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       value={{
         user,
         isAuthenticated: !!user,
+        isAdmin: !!user?.isAdmin,
         isLoading,
         login,
+        loginAsAdmin,
         register,
         logout
       }}

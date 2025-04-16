@@ -1,5 +1,6 @@
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { 
   SidebarProvider, 
   Sidebar, 
@@ -26,8 +27,25 @@ import {
 import { Link } from "react-router-dom";
 import { ThemeProvider } from "./ThemeContext";
 import { ThemeToggle } from "./ThemeToggle";
+import { useAuth } from "@/contexts/AuthContext";
+import { useEffect } from "react";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
+  const { isAdmin, logout } = useAuth();
+  const navigate = useNavigate();
+
+  // Redirect non-admin users
+  useEffect(() => {
+    if (!isAdmin) {
+      navigate('/admin-login');
+    }
+  }, [isAdmin, navigate]);
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+  
   return (
     <ThemeProvider>
       <SidebarProvider>
@@ -89,11 +107,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
             </SidebarContent>
             <SidebarFooter>
               <div className="flex items-center justify-between p-4">
-                <SidebarMenuButton asChild tooltip="Log Out">
-                  <Link to="/">
-                    <LogOut size={18} />
-                    <span>Log Out</span>
-                  </Link>
+                <SidebarMenuButton tooltip="Log Out" onClick={handleLogout}>
+                  <LogOut size={18} />
+                  <span>Log Out</span>
                 </SidebarMenuButton>
                 <ThemeToggle />
               </div>

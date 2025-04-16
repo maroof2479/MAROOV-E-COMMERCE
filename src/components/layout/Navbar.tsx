@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { ShoppingBag, Menu, X, User, Search, Moon, Sun, LogOut } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -21,8 +21,9 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { cartItems } = useCart();
   const { theme, toggleTheme } = useTheme();
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, isAdmin, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   
   const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
 
@@ -43,6 +44,11 @@ export default function Navbar() {
     logout();
     navigate('/');
   };
+
+  // Don't show the navbar on admin login page
+  if (location.pathname === '/admin-login') {
+    return null;
+  }
 
   return (
     <header 
@@ -78,6 +84,7 @@ export default function Navbar() {
               <DropdownMenuContent align="end">
                 <div className="px-2 py-1.5 text-sm font-medium">
                   {user?.name || user?.email}
+                  {isAdmin && <span className="ml-2 text-xs bg-primary/20 text-primary px-1 rounded">Admin</span>}
                 </div>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
@@ -86,6 +93,11 @@ export default function Navbar() {
                 <DropdownMenuItem asChild>
                   <Link to="/orders">My Orders</Link>
                 </DropdownMenuItem>
+                {isAdmin && (
+                  <DropdownMenuItem asChild>
+                    <Link to="/admin">Admin Dashboard</Link>
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout} className="text-destructive">
                   <LogOut className="mr-2 h-4 w-4" /> Sign Out
@@ -169,6 +181,11 @@ export default function Navbar() {
                 <Link to="/profile" onClick={() => setIsMobileMenuOpen(false)} className="hover:underline underline-offset-4 decoration-1">
                   My Profile
                 </Link>
+                {isAdmin && (
+                  <Link to="/admin" onClick={() => setIsMobileMenuOpen(false)} className="hover:underline underline-offset-4 decoration-1">
+                    Admin Dashboard
+                  </Link>
+                )}
                 <button onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }} className="hover:underline underline-offset-4 decoration-1">
                   Sign Out
                 </button>
@@ -183,9 +200,23 @@ export default function Navbar() {
                 </Link>
               </>
             )}
+            
+            {/* Discreet admin login link at the bottom */}
+            <div className="pt-10 opacity-50 text-xs">
+              <Link to="/admin-login" onClick={() => setIsMobileMenuOpen(false)} className="hover:underline">
+                Admin Access
+              </Link>
+            </div>
           </nav>
         </div>
       )}
+      
+      {/* Discreet admin login link */}
+      <div className="absolute bottom-2 right-2 opacity-30 hover:opacity-100 text-xs transition-opacity">
+        <Link to="/admin-login" className="text-muted-foreground hover:text-foreground">
+          Admin
+        </Link>
+      </div>
     </header>
   );
 }
