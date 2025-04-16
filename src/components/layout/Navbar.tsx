@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingBag, Menu, X, User, Search, Moon, Sun, LogOut } from 'lucide-react';
@@ -6,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { useCart } from '@/contexts/CartContext';
 import { useTheme } from '@/components/admin/ThemeContext';
 import { useAuth } from '@/contexts/AuthContext';
+import Logo from './Logo';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -50,9 +52,7 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="text-xl md:text-2xl font-serif font-medium">
-          Maroov
-        </Link>
+        <Logo />
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-8 text-sm">
