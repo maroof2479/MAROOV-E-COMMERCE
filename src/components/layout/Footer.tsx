@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import { Instagram, Twitter, Facebook, Mail } from 'lucide-react';
+import { Instagram, Twitter, Facebook, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -51,14 +51,37 @@ export default function Footer() {
         {/* Social and Copyright */}
         <div className="mt-12 pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center">
           <div className="flex space-x-6 mb-4 md:mb-0">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Instagram className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
+            <a 
+              href="https://www.facebook.com/share/14ym71ZnUc/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="Facebook"
+            >
+              <Facebook className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <a 
+              href="https://twitter.com/maroof__7/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="Twitter"
+            >
               <Twitter className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
             </a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <Facebook className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
+            <a 
+              href="https://instagram.com/maroof__7/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="Instagram"
+            >
+              <Instagram className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/maroof-vii-98505426b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
             </a>
             <a href="mailto:hello@aestheticavenue.com" aria-label="Email">
               <Mail className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
@@ -73,3 +96,4 @@ export default function Footer() {
     </footer>
   );
 }
+
