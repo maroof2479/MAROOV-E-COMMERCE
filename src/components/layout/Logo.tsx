@@ -38,7 +38,7 @@ const Logo: React.FC<LogoProps> = ({ className = "" }) => {
       </svg>
       <div className="flex flex-col">
         <span className="font-serif font-medium text-lg leading-tight">Maroov</span>
-        <span className="text-xs text-muted-foreground leading-none">maroof 7</span>
+        <span className="text-xs text-muted-foreground leading-none">MR7</span>
       </div>
     </Link>
   );
