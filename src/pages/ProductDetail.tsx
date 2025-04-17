@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { products } from '@/data/products';
 import Navbar from '@/components/layout/Navbar';
@@ -12,14 +12,50 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { useCart } from '@/contexts/CartContext';
 import ProductCard from '@/components/shop/ProductCard';
 import NotFound from './NotFound';
+import ProductDetailSkeleton from '@/components/shop/ProductDetailSkeleton';
 
 const ProductDetail = () => {
   const { id } = useParams();
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const product = products.find(p => p.id === id);
+  
+  useEffect(() => {
+    // Reset state when product ID changes
+    setQuantity(1);
+    setActiveImage(0);
+    setIsLoading(true);
+    
+    // Simulate data loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, [id]);
+  
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-grow pt-24 px-4">
+          <div className="container mx-auto">
+            <div className="mb-6">
+              <Link to="/shop" className="inline-flex items-center text-sm hover:underline">
+                <ChevronLeft className="h-4 w-4 mr-1" />
+                Back to Shop
+              </Link>
+            </div>
+            <ProductDetailSkeleton />
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
   
   if (!product) {
     return <NotFound />;

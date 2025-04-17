@@ -5,16 +5,19 @@ import { products, categories } from '@/data/products';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import ProductGrid from '@/components/shop/ProductGrid';
+import ProductGridSkeleton from '@/components/shop/ProductGridSkeleton';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Search, X } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useEffect } from 'react';
 
 const Shop = () => {
   const { category } = useParams();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState(category || 'all');
+  const [isLoading, setIsLoading] = useState(true);
 
   let filteredProducts = products;
 
@@ -25,12 +28,24 @@ const Shop = () => {
   }
 
   const handleCategoryChange = (value: string) => {
+    setIsLoading(true); // Start loading when category changes
     setActiveFilter(value);
+    setTimeout(() => setIsLoading(false), 800); // Simulate loading delay
   };
 
   const clearSearch = () => {
     setSearchQuery('');
   };
+
+  // Simulate initial loading
+  useEffect(() => {
+    // Simulate data fetching delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -83,11 +98,15 @@ const Shop = () => {
             <Separator className="my-6" />
           </div>
           
-          <ProductGrid 
-            products={filteredProducts} 
-            category={activeFilter !== 'all' ? activeFilter : undefined}
-            searchQuery={searchQuery}
-          />
+          {isLoading ? (
+            <ProductGridSkeleton />
+          ) : (
+            <ProductGrid 
+              products={filteredProducts} 
+              category={activeFilter !== 'all' ? activeFilter : undefined}
+              searchQuery={searchQuery}
+            />
+          )}
         </div>
       </main>
       <Footer />
