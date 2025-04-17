@@ -39,13 +39,16 @@ const Shop = () => {
 
   // Simulate initial loading
   useEffect(() => {
+    // Reset loading state when category changes in URL
+    setIsLoading(true);
+    
     // Simulate data fetching delay
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
     
     return () => clearTimeout(timer);
-  }, []);
+  }, [category]);
 
   return (
     <div className="min-h-screen flex flex-col">
