@@ -86,7 +86,7 @@ const Contact = () => {
               <div>
                 <h3 className="text-lg font-medium mb-2">Contact Information</h3>
                 <p className="text-muted-foreground">
-                  Email: info@aestheticavenue.com<br />
+                  Email: info@maroov.com<br />
                   Phone: (555) 123-4567
                 </p>
               </div>

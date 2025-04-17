@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -9,7 +8,7 @@ import { ChevronRight, Mail, Phone, MapPin, Clock, Instagram, Facebook, Twitter 
 const About = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = "About | Aesthetic Avenue";
+    document.title = "About | Maroov";
   }, []);
 
   return (
@@ -23,7 +22,7 @@ const About = () => {
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-serif font-medium mb-6">Our Story</h1>
               <p className="text-lg text-muted-foreground mb-8">
-                Founded in 2018, Aesthetic Avenue began as a small boutique with a vision to redefine contemporary fashion.
+                Founded in 2018, Maroov began as a small boutique with a vision to redefine contemporary fashion.
               </p>
             </div>
           </div>
@@ -36,7 +35,7 @@ const About = () => {
               <div>
                 <h2 className="text-3xl font-serif mb-6">Our Mission</h2>
                 <p className="text-muted-foreground mb-4">
-                  At Aesthetic Avenue, we believe that fashion should be both beautiful and accessible. Our mission is to create high-quality, thoughtfully designed pieces that elevate everyday style.
+                  At Maroov, we believe that fashion should be both beautiful and accessible. Our mission is to create high-quality, thoughtfully designed pieces that elevate everyday style.
                 </p>
                 <p className="text-muted-foreground mb-4">
                   We source sustainable materials and partner with ethical manufacturers to ensure our products are made with care for both people and planet.
@@ -86,7 +85,7 @@ const About = () => {
                   <MapPin className="w-5 h-5 mt-1 text-primary" />
                   <div>
                     <h3 className="font-medium mb-1">Our Store</h3>
-                    <p className="text-muted-foreground">123 Fashion Street, Design District, San Francisco, CA 94105</p>
+                    <p className="text-muted-foreground">123 Design Avenue, Design District, San Francisco, CA 94105</p>
                   </div>
                 </div>
 
@@ -112,7 +111,7 @@ const About = () => {
                   <Mail className="w-5 h-5 mt-1 text-primary" />
                   <div>
                     <h3 className="font-medium mb-1">Email</h3>
-                    <p className="text-muted-foreground">hello@aestheticavenue.com</p>
+                    <p className="text-muted-foreground">hello@maroov.com</p>
                   </div>
                 </div>
 
