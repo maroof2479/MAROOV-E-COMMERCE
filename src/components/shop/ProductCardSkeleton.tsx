@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 const ProductCardSkeleton = () => {
   return (
     <Card className="product-card-skeleton border-none shadow-none">
-      <div className="overflow-hidden mb-3">
+      <div className="overflow-hidden mb-3 rounded-md">
         <Skeleton className="w-full aspect-[3/4]" />
       </div>
       <CardContent className="px-1 py-3 space-y-2">
