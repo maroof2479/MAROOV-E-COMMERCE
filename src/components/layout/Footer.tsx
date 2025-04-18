@@ -6,12 +6,12 @@ import { Input } from '@/components/ui/input';
 
 export default function Footer() {
   return (
-    <footer className="bg-secondary/10 dark:bg-secondary/20 mt-20 pt-16 pb-8">
+    <footer className="bg-secondary/10 dark:bg-secondary/5 mt-20 pt-16 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Newsletter */}
           <div className="md:col-span-2">
-            <h3 className="text-lg font-medium mb-4 text-foreground">Join our newsletter</h3>
+            <h3 className="text-lg font-medium mb-4 text-foreground elegant-heading">Join our newsletter</h3>
             <p className="text-muted-foreground mb-4">
               Subscribe to receive updates, access to exclusive deals, and more.
             </p>
@@ -21,13 +21,13 @@ export default function Footer() {
                 placeholder="Enter your email"
                 className="bg-background border-border focus:border-primary"
               />
-              <Button variant="default">Subscribe</Button>
+              <Button variant="default" className="btn-hover-effect">Subscribe</Button>
             </div>
           </div>
           
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-medium mb-4 text-foreground">Quick Links</h3>
+            <h3 className="text-lg font-medium mb-4 text-foreground elegant-heading">Quick Links</h3>
             <ul className="space-y-2">
               <li><Link to="/shop" className="text-muted-foreground hover:text-primary transition-colors">Shop All</Link></li>
               <li><Link to="/shop/new" className="text-muted-foreground hover:text-primary transition-colors">New Arrivals</Link></li>
@@ -38,7 +38,7 @@ export default function Footer() {
           
           {/* Support */}
           <div>
-            <h3 className="text-lg font-medium mb-4 text-foreground">Support</h3>
+            <h3 className="text-lg font-medium mb-4 text-foreground elegant-heading">Support</h3>
             <ul className="space-y-2">
               <li><Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">Contact Us</Link></li>
               <li><Link to="/faq" className="text-muted-foreground hover:text-primary transition-colors">FAQs</Link></li>

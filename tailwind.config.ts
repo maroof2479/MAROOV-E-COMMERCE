@@ -58,6 +58,10 @@ export default {
 				sans: ['Inter', 'sans-serif'],
 				serif: ['Playfair Display', 'serif'],
 			},
+			boxShadow: {
+				'elegant': '0 4px 20px rgba(0, 0, 0, 0.07)',
+				'royal': '0 8px 30px rgba(0, 0, 0, 0.12)',
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',

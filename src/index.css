@@ -5,65 +5,65 @@
 
 @layer base {
   :root {
-    --background: 30 30% 98%;
-    --foreground: 20 14.3% 12%;
+    --background: 250 33% 98%;
+    --foreground: 240 10% 12%;
 
-    --card: 30 30% 98%;
-    --card-foreground: 20 14.3% 12%;
+    --card: 250 33% 98%;
+    --card-foreground: 240 10% 12%;
 
-    --popover: 30 30% 98%;
-    --popover-foreground: 20 14.3% 12%;
+    --popover: 250 33% 98%;
+    --popover-foreground: 240 10% 12%;
 
-    --primary: 262 83% 66%;  /* Updated to #8B5CF6 purple */
-    --primary-foreground: 60 9.1% 97.8%;
+    --primary: 262 83% 58%;  /* Royal purple */
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 38 92% 50%;  /* Updated to #F59E0B amber */
-    --secondary-foreground: 24 9.8% 10%;
+    --secondary: 47 95% 50%;  /* Rich gold */
+    --secondary-foreground: 240 10% 12%;
 
-    --accent: 187 92% 42%;  /* Updated to #06B6D4 cyan */
-    --accent-foreground: 24 9.8% 10%;
+    --accent: 250 40% 40%;  /* Deeper purple accent */
+    --accent-foreground: 210 40% 98%;
 
-    --muted: 60 4.8% 95.9%;
-    --muted-foreground: 25 5.3% 44.7%;
+    --muted: 250 33% 92%;
+    --muted-foreground: 240 5% 44%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 60 9.1% 97.8%;
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 20 5.9% 90%;
-    --input: 20 5.9% 90%;
-    --ring: 262 83% 66%;  /* Updated to match primary */
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 262 83% 58%;  /* Updated to match primary */
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 20 14.3% 12%;
-    --foreground: 60 9.1% 97.8%;
+    --background: 240 10% 12%;
+    --foreground: 210 40% 98%;
 
-    --card: 20 14.3% 12%;
-    --card-foreground: 60 9.1% 97.8%;
+    --card: 240 10% 12%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 20 14.3% 12%;
-    --popover-foreground: 60 9.1% 97.8%;
+    --popover: 240 10% 12%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 262 83% 66%;  /* Updated to #8B5CF6 purple */
-    --primary-foreground: 24 9.8% 10%;
+    --primary: 262 83% 62%;  /* Royal purple - slightly brighter for dark mode */
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 38 92% 50%;  /* Updated to #F59E0B amber */
-    --secondary-foreground: 60 9.1% 97.8%;
+    --secondary: 47 95% 50%;  /* Rich gold */
+    --secondary-foreground: 240 10% 12%;
 
-    --accent: 187 92% 42%;  /* Updated to #06B6D4 cyan */
-    --accent-foreground: 60 9.1% 97.8%;
+    --accent: 262 83% 28%;  /* Deeper purple accent */
+    --accent-foreground: 210 40% 98%;
 
-    --muted: 12 6.5% 15.1%;
-    --muted-foreground: 24 5.4% 63.9%;
+    --muted: 240 6% 18%;
+    --muted-foreground: 240 5% 76%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 60 9.1% 97.8%;
+    --destructive: 0 85% 40%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 12 6.5% 15.1%;
-    --input: 12 6.5% 15.1%;
-    --ring: 262 83% 66%;  /* Updated to match primary */
+    --border: 240 6% 20%;
+    --input: 240 6% 20%;
+    --ring: 262 83% 62%;  /* Updated to match primary */
   }
 }
 
@@ -92,13 +92,28 @@
     @apply animate-slide-in;
   }
 
-  /* Custom button hover effects */
+  /* Enhanced button hover effects */
   .btn-hover-effect {
-    @apply transition-all duration-200 hover:translate-y-[-2px];
+    @apply transition-all duration-200 hover:translate-y-[-2px] hover:shadow-md;
   }
   
   /* Enhanced card shadows */
   .card-shadow {
     @apply shadow-md hover:shadow-lg transition-shadow duration-300;
+  }
+  
+  /* Royal card styling */
+  .royal-card {
+    @apply border border-primary/10 bg-card shadow-sm hover:shadow-md transition-all duration-300;
+  }
+  
+  /* Gold accent borders */
+  .gold-accent {
+    @apply border-b-2 border-secondary inline-block;
+  }
+  
+  /* Elegant text styling */
+  .elegant-heading {
+    @apply font-serif leading-tight;
   }
 }
