@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 import { Instagram, Twitter, Facebook, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -5,12 +6,12 @@ import { Input } from '@/components/ui/input';
 
 export default function Footer() {
   return (
-    <footer className="bg-secondary mt-20 pt-16 pb-8">
+    <footer className="bg-secondary/10 dark:bg-secondary/20 mt-20 pt-16 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Newsletter */}
           <div className="md:col-span-2">
-            <h3 className="text-lg font-medium mb-4">Join our newsletter</h3>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Join our newsletter</h3>
             <p className="text-muted-foreground mb-4">
               Subscribe to receive updates, access to exclusive deals, and more.
             </p>
@@ -18,31 +19,31 @@ export default function Footer() {
               <Input 
                 type="email" 
                 placeholder="Enter your email"
-                className="bg-background"
+                className="bg-background border-border focus:border-primary"
               />
-              <Button>Subscribe</Button>
+              <Button variant="default">Subscribe</Button>
             </div>
           </div>
           
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-medium mb-4">Quick Links</h3>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link to="/shop" className="text-muted-foreground hover:text-foreground transition-colors">Shop All</Link></li>
-              <li><Link to="/shop/new" className="text-muted-foreground hover:text-foreground transition-colors">New Arrivals</Link></li>
-              <li><Link to="/shop/bestsellers" className="text-muted-foreground hover:text-foreground transition-colors">Bestsellers</Link></li>
-              <li><Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">About Us</Link></li>
+              <li><Link to="/shop" className="text-muted-foreground hover:text-primary transition-colors">Shop All</Link></li>
+              <li><Link to="/shop/new" className="text-muted-foreground hover:text-primary transition-colors">New Arrivals</Link></li>
+              <li><Link to="/shop/bestsellers" className="text-muted-foreground hover:text-primary transition-colors">Bestsellers</Link></li>
+              <li><Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">About Us</Link></li>
             </ul>
           </div>
           
           {/* Support */}
           <div>
-            <h3 className="text-lg font-medium mb-4">Support</h3>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Support</h3>
             <ul className="space-y-2">
-              <li><Link to="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact Us</Link></li>
-              <li><Link to="/faq" className="text-muted-foreground hover:text-foreground transition-colors">FAQs</Link></li>
-              <li><Link to="/shipping" className="text-muted-foreground hover:text-foreground transition-colors">Shipping & Returns</Link></li>
-              <li><Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">Contact Us</Link></li>
+              <li><Link to="/faq" className="text-muted-foreground hover:text-primary transition-colors">FAQs</Link></li>
+              <li><Link to="/shipping" className="text-muted-foreground hover:text-primary transition-colors">Shipping & Returns</Link></li>
+              <li><Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link></li>
             </ul>
           </div>
         </div>
@@ -55,7 +56,7 @@ export default function Footer() {
               rel="noopener noreferrer" 
               aria-label="Facebook"
             >
-              <Facebook className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
+              <Facebook className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
             </a>
             <a 
               href="https://twitter.com/maroof__7/" 
@@ -63,7 +64,7 @@ export default function Footer() {
               rel="noopener noreferrer" 
               aria-label="Twitter"
             >
-              <Twitter className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
+              <Twitter className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
             </a>
             <a 
               href="https://instagram.com/maroof__7/" 
@@ -71,7 +72,7 @@ export default function Footer() {
               rel="noopener noreferrer" 
               aria-label="Instagram"
             >
-              <Instagram className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
+              <Instagram className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
             </a>
             <a 
               href="https://www.linkedin.com/in/maroof-vii-98505426b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" 
@@ -79,10 +80,10 @@ export default function Footer() {
               rel="noopener noreferrer" 
               aria-label="LinkedIn"
             >
-              <Linkedin className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
+              <Linkedin className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
             </a>
             <a href="mailto:hello@maroov.com" aria-label="Email">
-              <Mail className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
+              <Mail className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
             </a>
           </div>
           
