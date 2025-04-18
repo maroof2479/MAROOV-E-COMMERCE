@@ -20,6 +20,7 @@ import Terms from "./pages/Terms";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminLogin from "./pages/AdminLogin";
+import InventoryArchive from "./pages/InventoryArchive";
 
 // Create the QueryClient instance outside the component
 const queryClient = new QueryClient();
@@ -59,6 +60,7 @@ function AppRoutes() {
         <Route path="/terms" element={<Terms />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/inventory-archive" element={<InventoryArchive />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

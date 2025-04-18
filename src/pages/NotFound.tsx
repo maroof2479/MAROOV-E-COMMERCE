@@ -36,13 +36,13 @@ const NotFound = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild>
+            <Button asChild className="btn-hover-effect">
               <Link to="/">
                 <HomeIcon className="mr-2 h-4 w-4" />
                 Go Home
               </Link>
             </Button>
-            <Button variant="outline" onClick={() => window.history.back()}>
+            <Button variant="outline" onClick={() => window.history.back()} className="btn-hover-effect">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Go Back
             </Button>
