@@ -53,7 +53,7 @@ export default function Navbar() {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-background/90 backdrop-blur-md shadow-sm' : 'bg-transparent'
+        isScrolled ? 'bg-background/90 backdrop-blur-md shadow-soft' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -61,62 +61,65 @@ export default function Navbar() {
         <Logo />
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex space-x-8 text-sm">
-          <Link to="/shop" className="hover:underline underline-offset-4 decoration-1">Shop All</Link>
-          <Link to="/shop/new" className="hover:underline underline-offset-4 decoration-1">New Arrivals</Link>
-          <Link to="/shop/bestsellers" className="hover:underline underline-offset-4 decoration-1">Bestsellers</Link>
-          <Link to="/about" className="hover:underline underline-offset-4 decoration-1">About</Link>
+        <nav className="hidden md:flex space-x-8 text-sm font-medium">
+          <Link to="/shop" className="text-highlight hover:text-primary transition-colors">Shop All</Link>
+          <Link to="/shop/new" className="text-highlight hover:text-primary transition-colors">New Arrivals</Link>
+          <Link to="/shop/bestsellers" className="text-highlight hover:text-primary transition-colors">Bestsellers</Link>
+          <Link to="/about" className="text-highlight hover:text-primary transition-colors">About</Link>
         </nav>
 
         {/* Right Actions */}
         <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="icon" aria-label="Search">
+          <Button variant="ghost" size="icon" className="hover:bg-primary/10" aria-label="Search">
             <Search className="h-5 w-5" />
           </Button>
           
           {isAuthenticated ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" aria-label="Account">
+                <Button variant="ghost" size="icon" className="hover:bg-primary/10" aria-label="Account">
                   <User className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <div className="px-2 py-1.5 text-sm font-medium">
+              <DropdownMenuContent align="end" className="w-56 glass-panel">
+                <div className="px-3 py-2 text-sm font-medium border-b border-border">
                   {user?.name || user?.email}
-                  {isAdmin && <span className="ml-2 text-xs bg-primary/20 text-primary px-1 rounded">Admin</span>}
+                  {isAdmin && <span className="ml-2 text-xs bg-primary/20 text-primary px-1.5 py-0.5 rounded-full">Admin</span>}
+                </div>
+                <div className="p-1">
+                  <DropdownMenuItem asChild className="cursor-pointer">
+                    <Link to="/profile" className="flex w-full">My Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="cursor-pointer">
+                    <Link to="/orders" className="flex w-full">My Orders</Link>
+                  </DropdownMenuItem>
+                  {isAdmin && (
+                    <DropdownMenuItem asChild className="cursor-pointer">
+                      <Link to="/admin" className="flex w-full">Admin Dashboard</Link>
+                    </DropdownMenuItem>
+                  )}
                 </div>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link to="/profile">My Profile</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/orders">My Orders</Link>
-                </DropdownMenuItem>
-                {isAdmin && (
-                  <DropdownMenuItem asChild>
-                    <Link to="/admin">Admin Dashboard</Link>
+                <div className="p-1">
+                  <DropdownMenuItem onClick={handleLogout} className="text-destructive cursor-pointer">
+                    <LogOut className="mr-2 h-4 w-4" /> Sign Out
                   </DropdownMenuItem>
-                )}
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout} className="text-destructive">
-                  <LogOut className="mr-2 h-4 w-4" /> Sign Out
-                </DropdownMenuItem>
+                </div>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button variant="ghost" size="icon" aria-label="Account" asChild>
+            <Button variant="ghost" size="icon" className="hover:bg-primary/10" aria-label="Account" asChild>
               <Link to="/login">
                 <User className="h-5 w-5" />
               </Link>
             </Button>
           )}
           
-          <Button variant="ghost" size="icon" aria-label="Cart" asChild>
+          <Button variant="ghost" size="icon" className="hover:bg-primary/10" aria-label="Cart" asChild>
             <Link to="/cart" className="relative">
               <ShoppingBag className="h-5 w-5" />
               {totalItems > 0 && (
-                <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs">
+                <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-secondary text-secondary-foreground">
                   {totalItems}
                 </Badge>
               )}
@@ -127,6 +130,7 @@ export default function Navbar() {
           <Button 
             variant="ghost" 
             size="icon" 
+            className="hover:bg-primary/10"
             aria-label="Toggle theme" 
             onClick={toggleTheme}
           >
@@ -140,7 +144,7 @@ export default function Navbar() {
           <Button 
             variant="ghost" 
             size="icon" 
-            className="md:hidden" 
+            className="md:hidden hover:bg-primary/10" 
             onClick={() => setIsMobileMenuOpen(true)} 
             aria-label="Menu"
           >
@@ -151,62 +155,92 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-background z-50 animate-fade-in">
+        <div className="fixed inset-0 bg-background/95 dark:bg-background/98 backdrop-blur-md z-50 animate-fade-in">
           <div className="container mx-auto px-4 py-4 flex justify-end">
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={() => setIsMobileMenuOpen(false)}
+              className="hover:bg-primary/10"
               aria-label="Close menu"
             >
               <X className="h-5 w-5" />
             </Button>
           </div>
           
-          <nav className="flex flex-col items-center justify-center h-[80vh] space-y-8 text-lg">
-            <Link to="/shop" onClick={() => setIsMobileMenuOpen(false)} className="hover:underline underline-offset-4 decoration-1">
+          <nav className="flex flex-col items-center justify-center h-[80vh] space-y-8 text-lg font-medium">
+            <Link 
+              to="/shop" 
+              onClick={() => setIsMobileMenuOpen(false)} 
+              className="hover:text-primary transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-secondary after:transition-all after:duration-300 hover:after:w-full"
+            >
               Shop All
             </Link>
-            <Link to="/shop/new" onClick={() => setIsMobileMenuOpen(false)} className="hover:underline underline-offset-4 decoration-1">
+            <Link 
+              to="/shop/new" 
+              onClick={() => setIsMobileMenuOpen(false)} 
+              className="hover:text-primary transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-secondary after:transition-all after:duration-300 hover:after:w-full"
+            >
               New Arrivals
             </Link>
-            <Link to="/shop/bestsellers" onClick={() => setIsMobileMenuOpen(false)} className="hover:underline underline-offset-4 decoration-1">
+            <Link 
+              to="/shop/bestsellers" 
+              onClick={() => setIsMobileMenuOpen(false)} 
+              className="hover:text-primary transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-secondary after:transition-all after:duration-300 hover:after:w-full"
+            >
               Bestsellers
             </Link>
-            <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="hover:underline underline-offset-4 decoration-1">
+            <Link 
+              to="/about" 
+              onClick={() => setIsMobileMenuOpen(false)} 
+              className="hover:text-primary transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-secondary after:transition-all after:duration-300 hover:after:w-full"
+            >
               About
             </Link>
+            
             {isAuthenticated ? (
               <>
-                <Link to="/profile" onClick={() => setIsMobileMenuOpen(false)} className="hover:underline underline-offset-4 decoration-1">
+                <Link 
+                  to="/profile" 
+                  onClick={() => setIsMobileMenuOpen(false)} 
+                  className="hover:text-primary transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-secondary after:transition-all after:duration-300 hover:after:w-full"
+                >
                   My Profile
                 </Link>
                 {isAdmin && (
-                  <Link to="/admin" onClick={() => setIsMobileMenuOpen(false)} className="hover:underline underline-offset-4 decoration-1">
+                  <Link 
+                    to="/admin" 
+                    onClick={() => setIsMobileMenuOpen(false)} 
+                    className="hover:text-primary transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-secondary after:transition-all after:duration-300 hover:after:w-full"
+                  >
                     Admin Dashboard
                   </Link>
                 )}
-                <button onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }} className="hover:underline underline-offset-4 decoration-1">
+                <button 
+                  onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }} 
+                  className="hover:text-destructive transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-destructive after:transition-all after:duration-300 hover:after:w-full"
+                >
                   Sign Out
                 </button>
               </>
             ) : (
               <>
-                <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="hover:underline underline-offset-4 decoration-1">
+                <Link 
+                  to="/login" 
+                  onClick={() => setIsMobileMenuOpen(false)} 
+                  className="hover:text-primary transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-secondary after:transition-all after:duration-300 hover:after:w-full"
+                >
                   Sign In
                 </Link>
-                <Link to="/register" onClick={() => setIsMobileMenuOpen(false)} className="hover:underline underline-offset-4 decoration-1">
+                <Link 
+                  to="/register" 
+                  onClick={() => setIsMobileMenuOpen(false)} 
+                  className="hover:text-primary transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-secondary after:transition-all after:duration-300 hover:after:w-full"
+                >
                   Create Account
                 </Link>
               </>
             )}
-            
-            {/* Discreet admin login link at the bottom */}
-            <div className="pt-10 opacity-50 text-xs">
-              <Link to="/admin-login" onClick={() => setIsMobileMenuOpen(false)} className="hover:underline">
-                Admin Access
-              </Link>
-            </div>
           </nav>
         </div>
       )}

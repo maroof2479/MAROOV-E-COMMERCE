@@ -5,65 +5,65 @@
 
 @layer base {
   :root {
-    --background: 250 33% 98%;
-    --foreground: 240 10% 12%;
+    --background: 220 33% 98%;
+    --foreground: 215 25% 12%;
 
-    --card: 250 33% 98%;
-    --card-foreground: 240 10% 12%;
+    --card: 220 33% 98%;
+    --card-foreground: 215 25% 12%;
 
-    --popover: 250 33% 98%;
-    --popover-foreground: 240 10% 12%;
+    --popover: 220 33% 98%;
+    --popover-foreground: 215 25% 12%;
 
-    --primary: 262 83% 58%;  /* Royal purple */
+    --primary: 245 70% 35%;  /* Deep Royal Blue */
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 47 95% 50%;  /* Rich gold */
-    --secondary-foreground: 240 10% 12%;
+    --secondary: 35 85% 55%;  /* Elegant Gold */
+    --secondary-foreground: 215 25% 12%;
 
-    --accent: 250 40% 40%;  /* Deeper purple accent */
+    --accent: 245 40% 25%;  /* Deep blue-purple accent */
     --accent-foreground: 210 40% 98%;
 
-    --muted: 250 33% 92%;
-    --muted-foreground: 240 5% 44%;
+    --muted: 220 33% 92%;
+    --muted-foreground: 215 15% 44%;
 
     --destructive: 0 85% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 240 6% 90%;
-    --input: 240 6% 90%;
-    --ring: 262 83% 58%;  /* Updated to match primary */
+    --border: 215 15% 90%;
+    --input: 215 15% 90%;
+    --ring: 245 70% 35%;  /* Updated to match primary */
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 240 10% 12%;
+    --background: 215 25% 12%;
     --foreground: 210 40% 98%;
 
-    --card: 240 10% 12%;
+    --card: 215 25% 12%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 240 10% 12%;
+    --popover: 215 25% 12%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 262 83% 62%;  /* Royal purple - slightly brighter for dark mode */
+    --primary: 245 70% 50%;  /* Royal Blue - brighter for dark mode */
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 47 95% 50%;  /* Rich gold */
-    --secondary-foreground: 240 10% 12%;
+    --secondary: 35 85% 65%;  /* Elegant Gold - brighter for dark mode */
+    --secondary-foreground: 215 25% 12%;
 
-    --accent: 262 83% 28%;  /* Deeper purple accent */
+    --accent: 245 40% 30%;  /* Deep blue-purple accent */
     --accent-foreground: 210 40% 98%;
 
-    --muted: 240 6% 18%;
-    --muted-foreground: 240 5% 76%;
+    --muted: 215 15% 18%;
+    --muted-foreground: 215 15% 76%;
 
     --destructive: 0 85% 40%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 240 6% 20%;
-    --input: 240 6% 20%;
-    --ring: 262 83% 62%;  /* Updated to match primary */
+    --border: 215 15% 20%;
+    --input: 215 15% 20%;
+    --ring: 245 70% 50%;  /* Updated to match primary */
   }
 }
 
@@ -81,7 +81,7 @@
   }
   
   .product-card {
-    @apply transition-all duration-300 hover:shadow-md hover:translate-y-[-4px];
+    @apply transition-all duration-300 hover:shadow-luxe hover:translate-y-[-4px];
   }
   
   .animate-enter {
@@ -99,12 +99,12 @@
   
   /* Enhanced card shadows */
   .card-shadow {
-    @apply shadow-md hover:shadow-lg transition-shadow duration-300;
+    @apply shadow-soft hover:shadow-luxe transition-shadow duration-300;
   }
   
   /* Royal card styling */
   .royal-card {
-    @apply border border-primary/10 bg-card shadow-sm hover:shadow-md transition-all duration-300;
+    @apply border border-primary/10 bg-card shadow-sm hover:shadow-luxe transition-all duration-300;
   }
   
   /* Gold accent borders */
@@ -116,4 +116,38 @@
   .elegant-heading {
     @apply font-serif leading-tight;
   }
+  
+  /* Luxury card effect */
+  .luxury-card {
+    @apply bg-gradient-luxury border border-white/10 dark:border-white/5 backdrop-blur-sm;
+  }
+  
+  /* Animated gradient button */
+  .gradient-btn {
+    @apply relative bg-primary overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-secondary/20 before:via-primary/50 before:to-secondary/20 before:bg-[length:400%] before:animate-shine hover:shadow-luxe;
+  }
+  
+  /* Glass panel effect */
+  .glass-panel {
+    @apply bg-white/70 dark:bg-black/20 backdrop-blur-md border border-white/20 dark:border-white/10;
+  }
+  
+  /* Text highlight effect */
+  .text-highlight {
+    @apply relative inline-block after:absolute after:bottom-0 after:left-0 after:h-[0.15em] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-secondary after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100;
+  }
+}
+
+/* Remove App.css default styles */
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }

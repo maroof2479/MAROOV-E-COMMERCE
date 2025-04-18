@@ -55,12 +55,14 @@ export default {
 				},
 			},
 			fontFamily: {
-				sans: ['Inter', 'sans-serif'],
-				serif: ['Playfair Display', 'serif'],
+				sans: ['Montserrat', 'sans-serif'],
+				serif: ['Cormorant Garamond', 'serif'],
 			},
 			boxShadow: {
 				'elegant': '0 4px 20px rgba(0, 0, 0, 0.07)',
 				'royal': '0 8px 30px rgba(0, 0, 0, 0.12)',
+				'luxe': '0 10px 40px -10px rgba(0, 0, 0, 0.2)',
+				'soft': '0 10px 30px rgba(0, 0, 0, 0.05)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -88,6 +90,14 @@ export default {
 					"0%": { transform: "translateX(-100%)" },
 					"100%": { transform: "translateX(100%)" }
 				},
+				"float": {
+					"0%, 100%": { transform: "translateY(0)" },
+					"50%": { transform: "translateY(-10px)" }
+				},
+				"shine": {
+					"0%": { backgroundPosition: "200% 0" },
+					"100%": { backgroundPosition: "-200% 0" }
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
@@ -95,7 +105,13 @@ export default {
 				"fade-in": "fade-in 0.4s ease-out",
 				"slide-in": "slide-in 0.3s ease-out",
 				"shimmer": "shimmer 1.5s infinite",
+				"float": "float 6s ease-in-out infinite",
+				"shine": "shine 3s linear infinite",
 			},
+			backgroundImage: {
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'gradient-luxury': 'linear-gradient(45deg, hsl(var(--primary)/0.2) 0%, hsl(var(--secondary)/0.1) 100%)',
+			}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
