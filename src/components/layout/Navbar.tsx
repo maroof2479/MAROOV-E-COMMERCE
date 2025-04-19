@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { ShoppingBag, Menu, X, User, Search, Moon, Sun, LogOut } from 'lucide-react';
@@ -49,6 +48,23 @@ export default function Navbar() {
   if (location.pathname === '/admin-login') {
     return null;
   }
+
+  useEffect(() => {
+    let keys: string[] = [];
+    const secretCode = ['a', 'd', 'm', 'i', 'n'];
+    
+    const handleKeyPress = (event: KeyboardEvent) => {
+      keys.push(event.key.toLowerCase());
+      keys = keys.slice(-secretCode.length);
+      
+      if (keys.join('') === secretCode.join('')) {
+        navigate('/admin-login');
+      }
+    };
+    
+    window.addEventListener('keypress', handleKeyPress);
+    return () => window.removeEventListener('keypress', handleKeyPress);
+  }, [navigate]);
 
   return (
     <header 
@@ -244,13 +260,6 @@ export default function Navbar() {
           </nav>
         </div>
       )}
-      
-      {/* Discreet admin login link */}
-      <div className="absolute bottom-2 right-2 opacity-30 hover:opacity-100 text-xs transition-opacity">
-        <Link to="/admin-login" className="text-muted-foreground hover:text-foreground">
-          Admin
-        </Link>
-      </div>
     </header>
   );
 }
