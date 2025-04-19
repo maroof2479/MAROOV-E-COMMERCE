@@ -30,14 +30,14 @@ export default function HeroSection() {
         onLoadedData={() => setIsVideoLoaded(true)}
       >
         <source 
-          src="https://assets.mixkit.co/videos/preview/mixkit-fashion-model-with-a-cold-and-serious-expression-39879-large.mp4" 
+          src="https://assets.mixkit.co/videos/preview/mixkit-woman-modeling-a-white-dress-in-autumn-leaves-40035-large.mp4" 
           type="video/mp4" 
         />
         Your browser does not support the video tag.
       </video>
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
 
       {/* Content */}
       <div className="relative h-full flex items-center">
@@ -45,26 +45,36 @@ export default function HeroSection() {
           <div className="max-w-3xl space-y-8">
             <div className="flex items-center gap-2 text-secondary animate-fade-in opacity-0" style={{ animationDelay: '0.5s' }}>
               <Diamond className="h-5 w-5" />
-              <span className="uppercase tracking-widest text-sm">Luxury Collection</span>
+              <span className="uppercase tracking-widest text-sm font-light">Luxury Redefined</span>
             </div>
             
             <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-tight animate-fade-in opacity-0" style={{ animationDelay: '0.7s' }}>
-              Timeless Elegance, <br />
-              Modern Luxury
+              MAROOV <br />
+              <span className="text-secondary/90">Collection 2025</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-white/80 max-w-xl animate-fade-in opacity-0" style={{ animationDelay: '0.9s' }}>
-              Discover our curated collection of premium pieces that blend artisanal craftsmanship with contemporary design.
+            <p className="text-lg md:text-xl text-white/90 max-w-xl animate-fade-in opacity-0 font-light" style={{ animationDelay: '0.9s' }}>
+              Where artisanal craftsmanship meets contemporary elegance. Experience luxury that transcends time.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in opacity-0" style={{ animationDelay: '1.1s' }}>
-              <Button size="lg" variant="luxury" className="text-base" asChild>
+              <Button 
+                size="lg" 
+                variant="luxury"
+                className="text-base relative overflow-hidden group hover:shadow-2xl transition-all duration-300" 
+                asChild
+              >
                 <Link to="/shop">
-                  Explore Collection <ArrowRight className="ml-2" />
+                  Discover Collection <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="text-white border-white/20 hover:bg-white/10" asChild>
-                <Link to="/about">Our Story</Link>
+              <Button 
+                size="lg" 
+                variant="gold"
+                className="text-base backdrop-blur-sm border-secondary/20 hover:border-secondary/40 transition-colors" 
+                asChild
+              >
+                <Link to="/about">Our Legacy</Link>
               </Button>
             </div>
           </div>
