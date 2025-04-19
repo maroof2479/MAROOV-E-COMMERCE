@@ -30,38 +30,38 @@ export default function HeroSection() {
         onLoadedData={() => setIsVideoLoaded(true)}
       >
         <source 
-          src="https://assets.mixkit.co/videos/preview/mixkit-woman-modeling-a-white-dress-in-autumn-leaves-40035-large.mp4" 
+          src="https://assets.mixkit.co/videos/preview/mixkit-fashion-model-walking-in-the-studio-810-large.mp4" 
           type="video/mp4" 
         />
         Your browser does not support the video tag.
       </video>
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+      {/* Dark Gradient Overlay - made slightly more transparent */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
 
-      {/* Content */}
-      <div className="relative h-full flex items-center">
+      {/* Content - Positioned with higher z-index and no fade animations */}
+      <div className="relative h-full flex items-center z-10">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl space-y-8">
-            <div className="flex items-center gap-2 text-secondary animate-fade-in opacity-0" style={{ animationDelay: '0.5s' }}>
+            <div className="flex items-center gap-2 text-secondary">
               <Diamond className="h-5 w-5" />
               <span className="uppercase tracking-widest text-sm font-light">Luxury Redefined</span>
             </div>
             
-            <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-tight animate-fade-in opacity-0" style={{ animationDelay: '0.7s' }}>
+            <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-tight">
               MAROOV <br />
-              <span className="text-secondary/90">Collection 2025</span>
+              <span className="text-secondary">Collection 2025</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-white/90 max-w-xl animate-fade-in opacity-0 font-light" style={{ animationDelay: '0.9s' }}>
+            <p className="text-lg md:text-xl text-white/90 max-w-xl font-light">
               Where artisanal craftsmanship meets contemporary elegance. Experience luxury that transcends time.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 animate-fade-in opacity-0" style={{ animationDelay: '1.1s' }}>
+            <div className="flex flex-col sm:flex-row gap-4">
               <Button 
                 size="lg" 
                 variant="luxury"
-                className="text-base relative overflow-hidden group hover:shadow-2xl transition-all duration-300" 
+                className="text-base relative group shadow-lg hover:shadow-xl transition-all duration-300" 
                 asChild
               >
                 <Link to="/shop">
@@ -71,7 +71,7 @@ export default function HeroSection() {
               <Button 
                 size="lg" 
                 variant="gold"
-                className="text-base backdrop-blur-sm border-secondary/20 hover:border-secondary/40 transition-colors" 
+                className="text-base shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm" 
                 asChild
               >
                 <Link to="/about">Our Legacy</Link>
