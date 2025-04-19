@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { ShoppingBag, Menu, X, User, Search, Moon, Sun, LogOut } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -44,20 +44,19 @@ export default function Navbar() {
     navigate('/');
   };
 
-  // Don't show the navbar on admin login page
   if (location.pathname === '/admin-login') {
     return null;
   }
 
   useEffect(() => {
-    let keys: string[] = [];
-    const secretCode = ['a', 'd', 'm', 'i', 'n'];
+    let secretCode: string[] = [];
+    const targetCode = ['a', 'd', 'm', 'i', 'n', '-', '2', '4', '7', '9'];
     
     const handleKeyPress = (event: KeyboardEvent) => {
-      keys.push(event.key.toLowerCase());
-      keys = keys.slice(-secretCode.length);
+      secretCode.push(event.key.toLowerCase());
+      secretCode = secretCode.slice(-targetCode.length);
       
-      if (keys.join('') === secretCode.join('')) {
+      if (secretCode.join('') === targetCode.join('')) {
         navigate('/admin-login');
       }
     };
@@ -73,10 +72,8 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Logo */}
         <Logo />
 
-        {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-8 text-sm font-medium">
           <Link to="/shop" className="text-highlight hover:text-primary transition-colors">Shop All</Link>
           <Link to="/shop/new" className="text-highlight hover:text-primary transition-colors">New Arrivals</Link>
@@ -84,7 +81,6 @@ export default function Navbar() {
           <Link to="/about" className="text-highlight hover:text-primary transition-colors">About</Link>
         </nav>
 
-        {/* Right Actions */}
         <div className="flex items-center space-x-4">
           <Button variant="ghost" size="icon" className="hover:bg-primary/10" aria-label="Search">
             <Search className="h-5 w-5" />
@@ -142,7 +138,6 @@ export default function Navbar() {
             </Link>
           </Button>
           
-          {/* Theme Toggle */}
           <Button 
             variant="ghost" 
             size="icon" 
@@ -169,7 +164,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 bg-background/95 dark:bg-background/98 backdrop-blur-md z-50 animate-fade-in">
           <div className="container mx-auto px-4 py-4 flex justify-end">
