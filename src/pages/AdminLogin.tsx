@@ -29,7 +29,7 @@ type FormData = z.infer<typeof formSchema>;
 
 // Admin credentials - in a real app, these would be stored securely in a database
 const ADMIN_EMAIL = "admin@maroov.com";
-const ADMIN_PASSWORD = "admin123";
+const ADMIN_PASSWORD = "admin-2479";
 
 export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false);
