@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { products } from '@/data/products';
@@ -24,12 +23,10 @@ const ProductDetail = () => {
   const product = products.find(p => p.id === id);
   
   useEffect(() => {
-    // Reset state when product ID changes
     setQuantity(1);
     setActiveImage(0);
     setIsLoading(true);
     
-    // Simulate data loading
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
@@ -92,7 +89,6 @@ const ProductDetail = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {/* Product Images */}
             <div>
               <div className="mb-4">
                 <AspectRatio ratio={1} className="bg-secondary/50 rounded-lg overflow-hidden">
@@ -127,7 +123,6 @@ const ProductDetail = () => {
               )}
             </div>
             
-            {/* Product Info */}
             <div>
               <div className="mb-6">
                 <p className="text-sm text-muted-foreground mb-1">{product.brand}</p>
@@ -160,7 +155,11 @@ const ProductDetail = () => {
                     </Button>
                   </div>
                   
-                  <Button onClick={handleAddToCart} className="flex-1">
+                  <Button 
+                    variant="luxury" 
+                    onClick={handleAddToCart} 
+                    className="flex-1"
+                  >
                     <ShoppingBag className="h-4 w-4 mr-2" />
                     Add to Cart
                   </Button>
@@ -194,7 +193,6 @@ const ProductDetail = () => {
             </div>
           </div>
           
-          {/* Related Products */}
           {relatedProducts.length > 0 && (
             <div className="mt-16">
               <Separator className="mb-8" />

@@ -34,7 +34,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       </Link>
       <div className="mt-4 px-1">
         <Button 
-          variant="outline" 
+          variant="luxury" 
           size="sm" 
           className="w-full"
           onClick={(e) => {
