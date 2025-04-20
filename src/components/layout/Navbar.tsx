@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { ShoppingBag, Menu, X, User, Search, Moon, Sun, LogOut } from 'lucide-react';
+import { ShoppingBag, Menu, X, User, Moon, Sun, LogOut } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from '@/contexts/CartContext';
 import { useTheme } from '@/components/admin/ThemeContext';
 import { useAuth } from '@/contexts/AuthContext';
 import Logo from './Logo';
+import { SearchDialog } from './SearchDialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -82,9 +83,7 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="icon" className="hover:bg-primary/10" aria-label="Search">
-            <Search className="h-5 w-5" />
-          </Button>
+          <SearchDialog />
           
           {isAuthenticated ? (
             <DropdownMenu>
