@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -27,14 +26,31 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-// Admin credentials - in a real app, these would be stored securely in a database
+// Admin credentials - in a real app with Supabase integration, 
+// these would be stored securely in the database and environment variables
+// For now, keeping them here but with better security plan documented
 const ADMIN_EMAIL = "admin@maroov.com";
 const ADMIN_PASSWORD = "admin-2479";
+
+// Maximum login attempts before temporary lockout
+const MAX_LOGIN_ATTEMPTS = 3;
+const LOCKOUT_TIME = 15 * 60 * 1000; // 15 minutes in milliseconds
 
 export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const { loginAsAdmin, isLoading } = useAuth();
   const navigate = useNavigate();
+  const [loginAttempts, setLoginAttempts] = useState(() => {
+    const storedAttempts = localStorage.getItem('adminLoginAttempts');
+    if (storedAttempts) {
+      try {
+        return JSON.parse(storedAttempts);
+      } catch {
+        return { count: 0, timestamp: 0 };
+      }
+    }
+    return { count: 0, timestamp: 0 };
+  });
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -44,15 +60,56 @@ export default function AdminLogin() {
     },
   });
 
+  const checkLockout = () => {
+    const now = Date.now();
+    if (loginAttempts.count >= MAX_LOGIN_ATTEMPTS && 
+        now - loginAttempts.timestamp < LOCKOUT_TIME) {
+      const remainingTime = Math.ceil((LOCKOUT_TIME - (now - loginAttempts.timestamp)) / (60 * 1000));
+      toast.error(`Too many failed attempts. Please try again in ${remainingTime} minutes.`);
+      return true;
+    }
+    
+    // Reset if lockout period has passed
+    if (loginAttempts.count >= MAX_LOGIN_ATTEMPTS && 
+        now - loginAttempts.timestamp >= LOCKOUT_TIME) {
+      setLoginAttempts({ count: 0, timestamp: 0 });
+      localStorage.setItem('adminLoginAttempts', JSON.stringify({ count: 0, timestamp: 0 }));
+    }
+    
+    return false;
+  };
+
   const onSubmit = async (values: FormData) => {
+    // Check if account is locked out
+    if (checkLockout()) {
+      return;
+    }
+    
     // Check if the credentials match the admin credentials
     if (values.email === ADMIN_EMAIL && values.password === ADMIN_PASSWORD) {
       const success = await loginAsAdmin(values.email);
       if (success) {
+        // Reset login attempts on successful login
+        setLoginAttempts({ count: 0, timestamp: 0 });
+        localStorage.setItem('adminLoginAttempts', JSON.stringify({ count: 0, timestamp: 0 }));
         navigate("/admin");
       }
     } else {
-      toast.error("Invalid admin credentials");
+      // Increment login attempts and update lockout timestamp
+      const now = Date.now();
+      const newAttempts = { 
+        count: loginAttempts.count + 1, 
+        timestamp: now 
+      };
+      
+      setLoginAttempts(newAttempts);
+      localStorage.setItem('adminLoginAttempts', JSON.stringify(newAttempts));
+      
+      if (newAttempts.count >= MAX_LOGIN_ATTEMPTS) {
+        toast.error(`Too many failed attempts. Account locked for ${LOCKOUT_TIME / (60 * 1000)} minutes.`);
+      } else {
+        toast.error(`Invalid admin credentials. ${MAX_LOGIN_ATTEMPTS - newAttempts.count} attempts remaining.`);
+      }
     }
   };
 
@@ -130,7 +187,7 @@ export default function AdminLogin() {
               <Button
                 type="submit"
                 className="w-full"
-                disabled={isLoading}
+                disabled={isLoading || checkLockout()}
               >
                 {isLoading ? (
                   <div className="flex items-center gap-2">

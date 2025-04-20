@@ -50,20 +50,14 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-    let secretCode: string[] = [];
-    const targetCode = ['a', 'd', 'm', 'i', 'n', '-', '2', '4', '7', '9'];
-    
-    const handleKeyPress = (event: KeyboardEvent) => {
-      secretCode.push(event.key.toLowerCase());
-      secretCode = secretCode.slice(-targetCode.length);
-      
-      if (secretCode.join('') === targetCode.join('')) {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.altKey && event.shiftKey && event.key === 'A') {
         navigate('/admin-login');
       }
     };
     
-    window.addEventListener('keypress', handleKeyPress);
-    return () => window.removeEventListener('keypress', handleKeyPress);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [navigate]);
 
   return (
